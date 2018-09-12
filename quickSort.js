@@ -10,7 +10,6 @@
 // QuickSort is unstable (other than MergeSort)
 
 // [Wikipedia](https://en.wikipedia.org/wiki/Quicksort)
-
 const numbers = [2, 6, 34, 3, 1, 8];
 console.log('\nUnsorted Array🛑 :', numbers, '\n');
 
@@ -58,4 +57,4 @@ function sort(list) {
   return list;
 }
 
-console.log('\nSorted Array🍾 :', numbers, '\n');
+console.log('\nSorted Array🍾 :', sort(numbers), '\n');
