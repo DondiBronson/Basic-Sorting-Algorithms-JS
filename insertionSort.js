@@ -1,16 +1,24 @@
-let list:number[] = [2, 6, 34, 3, 1, 8];
+// # Selection Sort
 
-console.log();
-console.log("Unsorted Array🛑 :", list);
-console.log();
+// Complexity:
 
-function sort(list: number[]) {
+// - Best Case: O(n)
+// - Average Case: O(n^2/4)
+// - Worst Case: O(n^2/2)
+
+// [Wikipedia](https://en.wikipedia.org/wiki/Insertion_sort)
+
+const numbers = [2, 6, 34, 3, 1, 8];
+
+console.log('\nUnsorted Array🛑 :', numbers, '\n');
+
+function sort(list) {
   // Outer Loop: counts from the first unordered index to the last (left to right)
   for (let index = 1; index < list.length; index++) {
     // the element one to the left of the sorted part of the array
-    const elementToSort: number = list[index];
+    const elementToSort = list[index];
     // counter for the loop which inserts the elementToSort at the right position in the already sorted part of the array
-    let innerLoopIndex: number = index;
+    let innerLoopIndex = index;
     while (innerLoopIndex > 0) {
       if (list[innerLoopIndex - 1] > elementToSort) {
         // moves the greater element one index to the right
@@ -25,8 +33,4 @@ function sort(list: number[]) {
     list[innerLoopIndex] = elementToSort;
   }
 }
-
-sort(list);
-
-console.log("Sorted Array🍾 :", list);
-console.log();
+console.log('\nSorted Array🍾 :', numbers);
