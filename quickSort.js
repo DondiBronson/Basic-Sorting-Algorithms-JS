@@ -10,51 +10,37 @@
 // QuickSort is unstable (other than MergeSort)
 
 // [Wikipedia](https://en.wikipedia.org/wiki/Quicksort)
+
 const numbers = [2, 6, 34, 3, 1, 8];
 console.log('\nUnsorted Array🛑 :', numbers, '\n');
 
-// divides the given list
-function divide(list, lowerBound, upperBound, pivot) {
-  const pivotValue = list[pivot];
-  let partitionIndex = lowerBound;
+function partition(arr, left, right) {
+  // chose the pivot
+  const pivot = arr[right];
+  let i = left - 1;
 
-  for (let i = lowerBound; i < upperBound; i++) {
-    if (list[i] <= pivotValue) {
-      [list[i], list[partitionIndex]] = [list[partitionIndex], list[i]];
-      partitionIndex++;
+  for (let j = left; j <= right - 1; j++) {
+    if (arr[j] <= pivot) {
+      i++;
+      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
   }
-  [list[upperBound], list[partitionIndex]] = [list[partitionIndex], list[upperBound]];
-  return partitionIndex;
+  // sort in the pivot at the right position
+  [arr[i + 1], arr[right]] = [arr[right], arr[i + 1]];
+
+  return i + 1;
 }
-// recursive method
-function quickSort(list, lowerBound, upperBound) {
-  let pivot;
 
-  // the list will be split here
-  let partitionIndex;
-
-  if (lowerBound < upperBound) {
-    // pivot can be set random but we take the upperBound
-    pivot = upperBound;
-
-    // the new partitionIndex is calculated with the current pivot
-    partitionIndex = divide(list, lowerBound, upperBound, pivot);
-
-    // sort the left and the right side recursivly
-    quickSort(list, lowerBound, partitionIndex - 1);
-    quickSort(list, partitionIndex + 1, upperBound);
+function quicksort(arr, left, right) {
+  // if the list has more than one element
+  if (left < right) {
+    const splitter = partition(arr, left, right);
+    // recursivly sort the letf and the right part
+    quicksort(arr, left, splitter - 1);
+    quicksort(arr, splitter + 1, right);
   }
-  // return the sorted list
-  return list;
 }
 
-// this method only calculates the bounds and hands the list over to the quickSortMethod
-function sort(list) {
-  const upperBound = list.length - 1;
-  const lowerBound = 0;
-  quickSort(list, lowerBound, upperBound);
-  return list;
-}
+quicksort(numbers, 0, numbers.length - 1);
 
-console.log('\nSorted Array🍾 :', sort(numbers), '\n');
+console.log('\nSorted Array🍾 :', numbers, '\n');
